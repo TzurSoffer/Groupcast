@@ -8,7 +8,6 @@ readme = "README.md"
 keywords = ["delegation", "broadcasting", "group", "OOP", "metaprogramming"]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent"
 ]
 

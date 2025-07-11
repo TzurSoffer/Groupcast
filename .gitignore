@@ -1,2 +1,4 @@
 .history/
+dist/
+groupcast.egg-info
 testing.py
