@@ -1,0 +1,22 @@
+[project]
+name = "groupcast"
+version = "1.0.0"
+description = "Dynamic method broadcasting to groups of objects"
+authors = [{name="Tzur Soffer", email="tzur.soffer@gmail.com"}]
+license = "MIT"
+readme = "README.md"
+keywords = ["delegation", "broadcasting", "group", "OOP", "metaprogramming"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/TzurSoffer/Groupcast"
+"Repository" = "https://github.com/TzurSoffer/Groupcast"
+
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
