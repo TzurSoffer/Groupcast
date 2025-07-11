@@ -3,20 +3,28 @@
 Groupcast
 ============
 
-The `Groupcast` library provides a simple interface for managing and interacting with a group of objects as if they were a single entity. It supports method broadcasting, property access, and basic list-like behavior (indexing, iteration, and length).
+**Groupcast** is a lightweight Python utility for broadcasting method calls and aggregating attribute access across a group of objects — as if they were a single entity.
 
-Features
---------
+It supports both serial and parallel execution modes, along with list-like behavior (iteration, indexing, appending, popping).
 
-*   Broadcast method calls to all objects in the group.
-    
-*   Aggregate attribute/property access from all objects.
-    
-*   Behaves like a list: supports `len()`, indexing (`[]`), and iteration.
-    
-*   Flexible construction: either provide a list of objects directly, or provide input data and a constructor class.
 
-Usage
+---
+
+## Features
+
+- ✅ Broadcast method calls across objects (`group.method(args)`)
+- ✅ Access non-callable attributes as aggregated lists (`group.attr`)
+- ✅ Switch between **serial** and **parallel** execution modes
+- ✅ Direct control via `apply()` for methods and `get()` for attributes
+- ✅ List-like behavior: `len()`, `[]`, iteration, `append()`, `pop()`
+
+---
+
+## Installation
+
+This library is instable via pip using the command `pip install groupcast`, if you would rather not use pip, you could also just drop this file into your project and import it that way.
+
+Simple Usage
 -----
 
 ```python
@@ -40,7 +48,7 @@ print(group[0].x)    #< to only print the value for the first object
 Constructor
 -----------
 
-`Group(inputs=None, class_=None, objects=None)`
+`Group(inputs=None, class_=None, objects=None, parallel=False, maxWorkers=None)`
 
 You can initialize a `Group` in two ways:
 
@@ -55,15 +63,43 @@ You can initialize a `Group` in two ways:
 
 If neither `objects` nor both `inputs` and `class_` are provided, a `TypeError` is raised.
 
-Attribute Access
-----------------
+Execution Modes
+---------------
 
-When accessing an attribute or method:
+Use `.changeExecutionMode(parallel=True, maxWorkers=...)` to toggle between:
 
-*   If it's a **non-callable** (e.g., a property or attribute), a list of values is returned from all objects.
+*   **Serial mode (default):** runs method calls one after another.
     
-*   If it's a **method**, a new function is returned that will call the method on all objects with the provided arguments and return a list of results.
+*   **Parallel mode:** runs method calls concurrently using threads.
+
+To change modes, use the following:<br>
+`group.changeExecutionMode(parallel=True) # now runs in parallel` <br>
+You can also set it to false to return back to serial mode
+
+Attribute & Method Access
+-------------------------
+
+*   `group.attr` returns a list of attribute values (e.g., `group.x will return [x1,x2,x3,x4] for every object`)
     
+*   `group.method(*args)` broadcasts the call across all objects and will return the results
+    
+*   For explicit control:
+    
+    *   `group.get("attrName")`
+        
+    *   `group.apply("methodName", *args)`
+        
+
+* * *
+
+Appending & Removing
+--------------------
+
+To append, you can use the append and pass the same varibles as you pass to __init__ <br>
+EX:
+`group.append(input=4, class_=Example)` will add a new Example object initialized with the value `4`
+
+You can append using either an `input` and `class_`, or a ready `object`.
 
 Example Use Cases
 -----------------

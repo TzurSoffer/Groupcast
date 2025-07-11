@@ -1,27 +1,30 @@
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 
 class Group:
-    def __init__(self, inputs=None, class_=None, objects=None, parallel=False, maxWorkers=None):
+    def __init__(self, class_=None, inputs=[], inputsKw=[], objects=None, parallel=False, maxWorkers=None):
         self.changeExecutionMode(parallel, maxWorkers)
 
         if objects is not None:
             self.objects = objects
-        elif inputs == None or class_ == None:
-            raise TypeError("Must set either 'objects' or both 'inputs' and 'class_'")
+        elif class_ == None:
+            raise TypeError("Must set either 'objects' or 'class_'")
         else:
-            self.objects = [class_(i) for i in inputs]
+            maxLen = max(len(inputs), len(inputsKw))
+            inputs += [()] * (maxLen - len(inputs))
+            inputsKw += [{}] * (maxLen - len(inputsKw))
+            self.objects = [class_(*inputs[i], **inputsKw[i]) for i in range(len(inputs))]
     
     def changeExecutionMode(self, parallel=False, maxWorkers=None):
         self.parallel = parallel
         self.maxWorkers = maxWorkers
     
-    def append(self, input=None, class_=None, object=None):
+    def append(self, class_=None, inputs=[], inputsKw={}, object=None):
         if object is not None:
             self.objects.append(object)
-        elif input == None or class_ == None:
-            raise TypeError("Must set either 'object' or both 'input' and 'class_'")
+        elif class_ == None:
+            raise TypeError("Must set either 'object' or 'class_'")
         else:
-            self.objects.append(class_(input))
+            self.objects.append(class_(*inputs, **inputsKw))
     
     def pop(self, index=-1):
         return(self.objects.pop(index))

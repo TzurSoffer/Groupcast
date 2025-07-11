@@ -1,12 +1,17 @@
 import groupcast
 
 class Person:
-    def __init__(self, name):
+    def __init__(self, name, isMale=True):
         self.name = name
-    def greet(self):
-        print(f"Hello, I'm {self.name}")
+        self.isMale = isMale
 
-group = groupcast.Group(inputs=["Alice", "Bob", "Charlie"], class_=Person)
+    def greet(self):
+        connection = ""
+        if self.isMale == False:
+            connection = "not "
+        print(f"Hello, I'm {self.name} and I am {connection}a male")
+
+group = groupcast.Group(Person, inputs=[["Alice"], ["Bob"], ["Charlie"]], inputsKw=[{"isMale": False}, {"isMale": True}, {"isMale": False}])
 
 # Broadcast method call
 group.greet()      #< Broadcast method calling

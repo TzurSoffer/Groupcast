@@ -10,7 +10,7 @@ class SlowWorker:
 
 # Serial (slow)
 b = time.time()
-group = groupcast.Group(inputs=[1, 2, 3], class_=SlowWorker)
+group = groupcast.Group(SlowWorker, inputs=[[1], [2], [3]])
 group.work()  #< Takes ~3 second
 print(f"Finished serial execution in {time.time()-b:2f} seconds")
 

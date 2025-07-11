@@ -6,7 +6,7 @@ class Box:
     def multiply(self, factor):
         return(self.value * factor)
 
-group = groupcast.Group(inputs=[1, 2, 3], class_=Box)
+group = groupcast.Group(Box, inputs=[[1], [2], [3]])
 
 # Using apply() directly
 print(group.apply("multiply", 10))  # [10, 20, 30]

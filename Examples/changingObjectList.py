@@ -1,3 +1,9 @@
+import sys
+import os
+
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, src_path)
+
 import groupcast
 
 class Box:
@@ -6,9 +12,9 @@ class Box:
     def multiply(self, factor):
         return(self.value * factor)
 
-group = groupcast.Group(inputs=[1, 2, 3], class_=Box)
+group = groupcast.Group(Box, inputs=[[1], [2], [3]])
 
-group.append(input=4, class_=Box)
+group.append(Box, inputs=[4])
 print(group.get("value"))  # [1, 2, 3, 4]
 
 removed = group.pop()
