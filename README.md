@@ -32,9 +32,9 @@ class Example:
     def __init__(self, x):
         self.x = x
     def double(self):
-        return self.x * 2
-inputs = [1, 2, 3]
-group = groupcast.Group(inputs=inputs, class_=Example) 
+        return(self.x * 2)
+inputs = [[1], [2], [3]]
+group = groupcast.Group(Example, inputs=inputs) 
 print(group.x)
 # should result in [1, 2, 3]
 
@@ -52,16 +52,16 @@ Constructor
 
 You can initialize a `Group` in two ways:
 
-1.  **Using `inputs` and `class_`**:
+1.  **Using `class_`**:
     
-    *   Creates a list of objects by passing each element of `inputs` to the `class_` constructor.
+    *   Creates a list of objects by creating the `class_` constructor.
         
 2.  **Using `objects` directly**:
     
     *   Pass in a list of pre-created objects.
         
 
-If neither `objects` nor both `inputs` and `class_` are provided, a `TypeError` is raised.
+If neither `objects` nor `class_` is provided, a `TypeError` is raised.
 
 Execution Modes
 ---------------
@@ -99,7 +99,7 @@ To append, you can use the append and pass the same varibles as you pass to __in
 EX:
 `group.append(input=4, class_=Example)` will add a new Example object initialized with the value `4`
 
-You can append using either an `input` and `class_`, or a ready `object`.
+You can append using either `class_`, or a ready `object`.
 
 Example Use Cases
 -----------------

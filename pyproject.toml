@@ -1,6 +1,6 @@
 [project]
 name = "groupcast"
-version = "1.1.0"
+version = "1.1.2"
 description = "Dynamic method broadcasting to groups of objects"
 authors = [{name="Tzur Soffer", email="tzur.soffer@gmail.com"}]
 license = "MIT"
