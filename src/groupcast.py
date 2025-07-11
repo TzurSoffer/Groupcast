@@ -5,7 +5,7 @@ class Group:
         elif inputs == None or class_ == None:
             raise TypeError("Must set either 'objects' or both 'inputs' and 'class_'")
         else:
-            self.objects = class_(inputs)
+            self.objects = [class_(i) for i in inputs]
 
     def __getattr__(self, name):
         attrs = [getattr(obj, name) for obj in self.objects]

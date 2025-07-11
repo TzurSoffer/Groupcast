@@ -23,19 +23,18 @@ Usage
 class Example:
     def __init__(self, x):
         self.x = x
-        def double(self):
-            return self.x * 2
+    def double(self):
+        return self.x * 2
 inputs = [1, 2, 3]
-group = Group(inputs=inputs, class_=Example) 
+group = groupcast.Group(inputs=inputs, class_=Example) 
 print(group.x)
 # should result in [1, 2, 3]
 
 print(group.double())
 # should result in [2, 4, 6]
 
-print(obj.x)
-
 print(group[0].x)    #< to only print the value for the first object
+# should result in 1
 ```
 
 Constructor
