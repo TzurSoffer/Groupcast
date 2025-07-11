@@ -2,3 +2,4 @@
 dist/
 groupcast.egg-info
 testing.py
+secrets
